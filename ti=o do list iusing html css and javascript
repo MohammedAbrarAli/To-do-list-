@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> To do App</title>
+    <style>
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+    background-image: linear-gradient(to right, 
+        #6c9eeb, #050031);
+    background-repeat: no-repeat;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+
+        .main {
+            background-image: linear-gradient(to right, 
+        #1a0466, #0282eb);
+            padding: 0px 30px 50px;
+            width: 50%;
+            border-radius: 20px;
+            height: auto;
+            overflow: scroll;
+            position: relative;
+        }
+        .section{
+            background-image: linear-gradient(to right, 
+        #fff, #fff);
+        }
+
+        ::-webkit-scrollbar {
+            width: 1px;
+            height: 1px;
+            background-color: transparent;
+        }
+
+        ::-webkit-scrollbar-corner {
+            width: 1px;
+            height: 1px;
+            background-color: transparent;
+        }
+
+        .header h1 {
+            font-family:  Copperplate,Copperplate Gothic Light,fantasy;
+            font-style: italic;
+            padding: 2px 10px;
+            color: white;
+
+        }
+        .header h2 {
+            font-family: Copperplate,Copperplate Gothic Light,fantasy; 
+            font-style: italic;
+            padding: 2px 10px;
+            color: white;
+        }
+        .top{
+            position: sticky;
+            top: 0;
+            left: 0;
+            background-image: linear-gradient(to right, 
+            #1a0466, #0282eb);
+            padding: 15px 0 20px;
+        }
+
+        .search {
+            width: 100%;
+            display: flex;
+            border-radius: 20px;
+            justify-content: center;
+            background-color: rgb(240, 240, 240);
+        }
+
+        .search input {
+            width: 100%;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            padding: 10px 10px 10px 20px;
+        }
+
+        .search button {
+            background-image: linear-gradient(to right, 
+        #fff, #0282eb);
+            padding: 10px;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            color: white;
+            font-weight: bolder;
+            font-size: 15px;
+            width: 20%;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        ul li {
+            width: 95%;
+            padding: 15px;
+            border: 1px solid  #fff;
+            border-top: none;
+            font-size: 20px;
+            font-weight: bolder;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        ul li:nth-of-type(1) {
+            border-top: 1px dashed  #fff;
+        }
+
+        ul li:hover {
+            background-color: rgb(255, 250, 250);
+        }
+
+        li div {
+            background-color: transparent;
+            display: flex;
+            justify-content: space-between;
+            width: 100px;
+        }
+
+        li div button {
+            background-color: transparent;
+            font-weight: bold;
+            outline: none;
+            border: none;
+            width: 60%;
+            padding: 10px;
+        }
+
+        li button:nth-of-type(2) {
+            width: 30%;
+            border-radius: 50%;
+            padding: 10px;
+            text-align: center;
+        }
+
+        li button:nth-of-type(2):hover {
+            background-color: rgba(255, 0, 0, 0.3);
+        }
+
+        li div button:hover {
+            background-color: rgb(240, 240, 240);
+        }
+
+        @media screen and (max-width: 850px) {
+            .main {
+                width: 70%;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            .main {
+                width: 80%;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            h1 {
+                font-size: 30px;
+                text-align: center;
+            }
+        }
+
+        @media screen and (max-width: 350px) {
+            .search {
+                width: 110%;
+                margin: auto;
+                margin-left: -10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main" id="height">
+        <div class="top">
+            <div class="header">
+                <h1>Task List</h1>
+                <h2>Please Describe your task.</h2>
+            </div>
+            <div class="search">
+                <input type="text" placeholder="Add your Task Here.." id="inputField">
+                <button onclick="addTheTask()">Add</button>
+            </div>
+        </div>
+        <div class="section">
+            <ul id="Tasks"></ul>
+        </div>
+    </div>
+    <button onclick="h()" style="display: none;">as</button>
+    <script>
+       var input = document.getElementById("inputField");
+var tasks = document.getElementById("Tasks");
+
+function addTheTask() {
+  if (input.value != "") {
+    var li = document.createElement("li");
+    var p = document.createElement("p");
+    p.innerHTML = input.value;
+    li.appendChild(p);
+    tasks.appendChild(li);
+    var div = document.createElement("div");
+    li.appendChild(div);
+    var add = document.createElement("button");
+    add.innerHTML = "Done";
+    div.appendChild(add);
+    add.onclick = function() {
+      if (p.style.textDecoration != "line-through") {
+        p.style.textDecoration = "line-through";
+      } else {
+        p.style.textDecoration = "none";
+      }
+    };
+    var span = document.createElement("button");
+    span.innerHTML = "X";
+    div.appendChild(span);
+    span.onclick = function() {
+      li.parentElement.removeChild(li);
+    };
+    input.value = "";
+
+    // Add time to task
+    var timeInput = document.getElementById("timeInput");
+var time = parseInt(timeInput.value, 10); // Parse the input value as an integer
+var date = new Date();
+date.setHours(date.getHours() + time);
+
+var p = document.getElementById("p"); // Get the HTML element with id "p"
+p.setAttribute("data-time", date.toLocaleString());
+
+  } else {
+    alert("Error");
+  }
+}
+
+setInterval(h, 1000);
+
+function h() {
+  var offsetHeight = document.getElementById('height');
+  console.log(offsetHeight.clientHeight);
+  if (offsetHeight.clientHeight > 600) {
+    document.getElementById("height").style.height = "600px";
+    document.getElementById("height").style.paddingBottom = "30px";
+  }
+};  
+    </script>
+</body>
+
+</html>
+To-Do List
